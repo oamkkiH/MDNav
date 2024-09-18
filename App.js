@@ -1,24 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-/* 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-}); */
-
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -33,7 +12,15 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={({ route, navigation }) => ({
-          header: () => <AppBar back={navigation.canGoBack()} title={route.name} />
+          header: () => {
+            const canGoBack = navigation.canGoBack();
+            return (
+              <AppBar
+                title={route.name === 'HomeScreen' ? 'MD Nav Demo' : 'Second Screen'}
+                canGoBack={canGoBack}
+              />
+            );
+          }
         })}
       >
         <Stack.Screen name="HomeScreen" component={HomeScreen} />

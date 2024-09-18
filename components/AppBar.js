@@ -1,23 +1,22 @@
 import React from 'react';
 import { Appbar } from 'react-native-paper';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-const AppBar = ({ back, title }) => {
+const AppBar = ({ title, canGoBack }) => {
   const navigation = useNavigation();
-  const route = useRoute();
 
   return (
     <Appbar.Header>
-      {back ? (
+      {canGoBack && (
         <Appbar.BackAction onPress={() => navigation.goBack()} />
-      ) : (
+      )}
+      <Appbar.Content title={title} />
+      {!canGoBack && (
         <Appbar.Action
           icon="arrow-right"
           onPress={() => navigation.navigate('SecondScreen')}
         />
       )}
-      <Appbar.Content title={title} />
     </Appbar.Header>
   );
 };
